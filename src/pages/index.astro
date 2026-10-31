@@ -1,0 +1,283 @@
+---
+import "../styles/fonts.css";
+import "../styles/landing.css";
+import AppWindow from "../components/AppWindow.astro";
+import Screenshot from "../components/Screenshot.astro";
+
+const repository = "https://github.com/adroit-app/Adroit";
+const title = "Adroit | An Agent Workspace for people who live in Vim";
+const description =
+  "Adroit puts Claude Code, Codex, Pi and OpenCode sessions side by side in one window, each in its own terminal interface. You write prompts in a real Neovim and move around with Vim's motions.";
+const icon = new URL("/logo/adroit-icon-512.png", Astro.site).href;
+
+const pillars = [
+  {
+    title: "Any agent, as it is",
+    body: "Claude Code, Codex, Pi and OpenCode run in the terminal interfaces they ship, unchanged, side by side. Pick the agent for the work, not the tool for the agent.",
+    keys: [["Ctrl+g p", "next profile on a new session"]],
+  },
+  {
+    title: "Writing in Neovim",
+    body: "The prompt is a real Neovim, with your motions, operators, registers, mappings and plugins. Not an input line that imitates a few of them.",
+    keys: [
+      ["i", "write to the session"],
+      ["Ctrl+Enter", "send"],
+    ],
+  },
+  {
+    title: "Moving in Vim's grammar",
+    body: "Panes, the tree of sessions and what is selected are reached with motions and acted on with commands, as text is in Vim. Nothing needs the mouse.",
+    keys: [
+      ["Ctrl+q h j k l", "move between windows"],
+      ["Mod+j", "next session waiting on you"],
+    ],
+  },
+];
+
+const ground = [
+  {
+    title: "Waiting on you, first",
+    body: "Sessions that wait on an answer or a permission are listed again at the bottom of the tree, across every repository, one key apart.",
+    href: "/docs/window/#the-tree",
+  },
+  {
+    title: "Sessions outlive the window",
+    body: "Sessions and shells run in hosts of their own. Close Adroit and they keep going; open it again, or several windows at once, and they are as they were.",
+    href: "/docs/window/",
+  },
+  {
+    title: "Grouped the way git is",
+    body: "Sessions sit under the repository and worktree they run in, with the worktree's files and shells beside them. Nothing has to be named before the first prompt.",
+    href: "/docs/getting-started/",
+  },
+  {
+    title: "The work at hand to read",
+    body: "The details panel shows the session's state, its changes and log through git or jj, the agents it worked with, the files and links it brought up, and its usage.",
+    href: "/docs/window/#the-details-panel",
+  },
+  {
+    title: "Sessions beside sessions",
+    body: "Every session can open another for a separate line of work, in a worktree of its own, and talk with the others as peers. Each one still answers to you.",
+    href: "/docs/opening-sessions/",
+  },
+  {
+    title: "On another machine",
+    body: "Pair with a work machine and its sessions appear in the same tree, beside this Mac's. Close the lid; the work goes on there.",
+    href: "/docs/environments/",
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={Astro.site} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.site} />
+    <meta property="og:image" content={icon} />
+    <meta name="twitter:card" content="summary" />
+    <script is:inline>
+      // Follow the theme chosen in the docs (Starlight keeps it here), else the OS.
+      try {
+        const theme = localStorage.getItem("starlight-theme");
+        if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Adroit">
+        <img class="on-light" src="/logo/adroit-logo-horizontal.svg" alt="" width="156" height="36" />
+        <img class="on-dark" src="/logo/adroit-logo-horizontal-light.svg" alt="" width="156" height="36" />
+      </a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="/docs/">Docs</a>
+        <a href="#install">Install</a>
+        <a href={repository}>GitHub</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">An Agent Workspace for people who live in Vim</p>
+        <h1 id="hero-title">Drive every coding agent <em>the way you edit.</em></h1>
+        <p class="lede">
+          Adroit puts your Claude Code, Codex, Pi and OpenCode sessions side by side in one window, each in the interface
+          its agent ships. You write to them in a real Neovim and move between them with Vim's motions, by hand.
+        </p>
+        <div class="actions">
+          <a class="button is-primary" href="#install">Install Adroit</a>
+          <a class="button" href="/docs/">Read the docs</a>
+        </div>
+        <p class="fine">Free and open source · macOS, with headless hosts for Linux · Early, expect rough edges</p>
+      </section>
+
+      <section class="window" aria-label="Adroit's window">
+        <AppWindow />
+      </section>
+
+      <section class="pillars" aria-labelledby="pillars-title">
+        <h2 id="pillars-title">The hand on the work</h2>
+        <p class="section-lede">
+          Many tools run agents for you. Adroit is for working with them yourself, at the pace of your attention and your
+          review, and for that to feel like editing rather than operating a dashboard.
+        </p>
+        <ol class="pillar-list">
+          {
+            pillars.map((p) => (
+              <li>
+                <h3>{p.title}</h3>
+                <p>{p.body}</p>
+                <dl class="keys">
+                  {p.keys.map(([k, what]) => (
+                    <div>
+                      <dt>
+                        {k.split(" ").map((key) => (
+                          <kbd>{key}</kbd>
+                        ))}
+                      </dt>
+                      <dd>{what}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="ground" aria-labelledby="ground-title">
+        <h2 id="ground-title">And the ground under it</h2>
+        <p class="section-lede">What any place for agent sessions has to do well, done so it never gets in the way.</p>
+        <ul class="ground-list">
+          {
+            ground.map((g) => (
+              <li>
+                <h3>
+                  <a href={g.href}>{g.title}</a>
+                </h3>
+                <p>{g.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="tree-section" aria-labelledby="tree-title">
+        <div class="tree-copy">
+          <h2 id="tree-title">Start by choosing where. Nothing else.</h2>
+          <p>
+            Press <kbd>Mod+p</kbd>, pick a directory from those already in use, from your ghq repositories or from a file
+            tree, and write the first prompt. The session is named from it, and lands in the tree under its repository and
+            worktree.
+          </p>
+          <p>
+            No project to set up, no task to declare. What the work turns out to be shows as you go. With no directory at
+            all, a <a href="/docs/getting-started/#scratch-sessions">scratch session</a> gets a folder of its own.
+          </p>
+        </div>
+        <Screenshot
+          name="picker"
+          alt="Adroit's picker, titled Go to a session, or start one, with api typed and the ghq repositories acme/api and acme/api-client offered to start in."
+          width={1600}
+          height={1050}
+        />
+      </section>
+
+      <section class="tree-section is-flipped" aria-labelledby="shells-title">
+        <div class="tree-copy">
+          <h2 id="shells-title">A shell where the work is.</h2>
+          <p>
+            Press <kbd>Mod+s</kbd> and a shell opens in the current worktree, listed under its{" "}
+            <strong>Terminals</strong> beside that worktree's sessions and files. Run the build or the tests there, and read
+            them in the same window.
+          </p>
+          <p>
+            Like a session, a shell keeps running when the window closes. Sessions can start one too, so a dev server or a
+            probe an agent runs is in the tree where you can see it, not hidden in the background.
+          </p>
+          <p class="more"><a href="/docs/terminals/">Shells and terminals</a></p>
+        </div>
+        <Screenshot
+          name="console"
+          alt="Adroit's window with a shell named build open under the api repository in the tree, showing cargo run compiling and running the project, and the repository's latest commit in the details panel."
+          width={1600}
+          height={1050}
+        />
+      </section>
+
+      <section class="not" aria-labelledby="not-title">
+        <h2 id="not-title">What Adroit is not</h2>
+        <ul class="not-list">
+          <li>
+            <strong>Not a chat view.</strong> It never rebuilds an agent's screen from structured output. An agent behaves in
+            Adroit as it does in a terminal.
+          </li>
+          <li>
+            <strong>Not an orchestrator.</strong> No session runs others as its workers. Each one plans and does its own work
+            and answers to you.
+          </li>
+          <li>
+            <strong>Not an editor.</strong> Files, logs and diffs are there to be read. Real editing happens in your usual
+            editor, which Adroit opens beside the sessions.
+          </li>
+        </ul>
+        <p class="more"><a href="/docs/concept/">The concept behind it</a></p>
+      </section>
+
+      <section id="install" aria-labelledby="install-title">
+        <div class="install">
+          <h2 id="install-title">Install</h2>
+          <p class="section-lede">
+            Adroit is early and has no release yet: build it from source. It needs git and at least one supported agent on
+            your <code>PATH</code>. jj and ghq are used when installed.
+          </p>
+          <div class="install-ways">
+            <div class="install-way">
+              <h3>The macOS app</h3>
+              <p>Build Adroit.app with Nix and install it into Applications.</p>
+              <code>nix develop -c just install-macos</code>
+            </div>
+            <div class="install-way">
+              <h3>Run from the source</h3>
+              <p>Build and open a window straight from a checkout.</p>
+              <code>nix develop -c cargo run --release -p adroit</code>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="button is-primary" href="/docs/install/">Install guide</a>
+            <a class="button" href="/docs/getting-started/">Getting started</a>
+            <a class="button" href={repository}>Source on GitHub</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <img class="on-light" src="/logo/adroit-mark-32.svg" alt="" width="32" height="32" />
+        <img class="on-dark" src="/logo/adroit-mark-32-light.svg" alt="" width="32" height="32" />
+        <p>Adroit is a workbench for working with coding agents by hand.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/docs/">Docs</a>
+        <a href="/docs/concept/">Concept</a>
+        <a href={repository}>Source code</a>
+        <a href={`${repository}/issues`}>Report a problem</a>
+      </nav>
+      <p class="footer-legal">
+        Adroit is MIT licensed. The Adroit name and logo are not covered by that licence. Claude Code, Codex, Pi, OpenCode
+        and Neovim belong to their owners.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,869 @@
+---
+/**
+ * Adroit's main window, drawn as the app draws it: the same panels, rows,
+ * tabs, prompt card and details, in the colours of its default theme
+ * (crates/window/assets/css in the Adroit repository), scaled as one piece.
+ * The agents' consoles are a sketch: what they show is their own interface.
+ */
+import Icon from "./Icon.astro";
+---
+
+<figure class="shot">
+  <div class="app" aria-hidden="true">
+    <div class="header">
+      <span class="lights"><i></i><i></i><i></i></span>
+      <span class="toggle"><Icon name="layout-sidebar" /></span>
+      <span class="crumbs">
+        <span class="crumb is-env"><Icon name="device-desktop" />This Mac</span>
+        <span class="sep"><Icon name="chevron-right" /></span>
+        <span class="crumb"><Icon name="folder" />api</span>
+        <span class="sep"><Icon name="chevron-right" /></span>
+        <span class="crumb is-path"><Icon name="git-branch" />~/src/api</span>
+      </span>
+      <span class="spacer"></span>
+      <span class="chip is-wait"><Icon name="bell" />1 waiting</span>
+      <span class="toggle"><Icon name="layout-sidebar-right" /></span>
+      <span class="toggle"><Icon name="settings" /></span>
+    </div>
+
+    <div class="body">
+      <aside class="panel tree">
+        <div class="bar">
+          <span class="filter"><Icon name="filter" /><span class="placeholder">Filter</span></span>
+          <span class="toggle"><Icon name="list-tree" /></span>
+          <span class="toggle"><Icon name="plus" /></span>
+        </div>
+        <div class="rows">
+          <div class="row env"><Icon name="device-desktop" /><span class="name">This Mac</span><i class="dot"></i></div>
+          <div class="row head"><span class="mark"><Icon name="folder-open" /></span><span class="name">api</span></div>
+          <div class="row head d1"><span class="mark"><Icon name="git-branch" /></span><span class="name">main</span></div>
+          <div class="row group d2"><span class="mark"><Icon name="chevron-right" /></span>Files</div>
+          <div class="row group d2"><span class="mark"><Icon name="chevron-down" /></span>Sessions <span class="count">2</span></div>
+          <div class="row d3 shown">
+            <span class="glyph run"><Icon name="loader-2" /></span><span class="name">auth-revamp</span><span class="where">1</span>
+          </div>
+          <div class="row d3">
+            <span class="glyph done"><Icon name="check" /></span><span class="name">review-api</span><span class="badge">Codex</span><span class="where">2</span>
+          </div>
+          <div class="row group d2"><span class="mark"><Icon name="chevron-down" /></span>Terminals <span class="count">1</span></div>
+          <div class="row d3 mono"><span class="mark"><Icon name="terminal-2" /></span><span class="name">dev-server</span></div>
+          <div class="row head d1"><span class="mark"><Icon name="git-branch" /></span><span class="name">feat/oauth</span></div>
+          <div class="row group d2"><span class="mark"><Icon name="chevron-down" /></span>Sessions <span class="count">1</span></div>
+          <div class="row d3">
+            <span class="glyph wait"><Icon name="bell" /></span><span class="name">implement</span><span class="badge">Pi</span>
+          </div>
+          <div class="row head"><span class="mark"><Icon name="folder-open" /></span><span class="name">notes</span></div>
+          <div class="row group d1"><span class="mark"><Icon name="chevron-down" /></span>Sessions <span class="count">1</span></div>
+          <div class="row d2">
+            <span class="glyph idle"><Icon name="circle" /></span><span class="name">outline-the-talk</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="inbox">
+          <div class="row">
+            <span class="glyph wait"><Icon name="bell" /></span>
+            <span class="inbox-text">
+              <span class="name">implement</span>
+              <span class="sub">Allow bash: npm test?</span>
+            </span>
+          </div>
+        </div>
+      </aside>
+
+      <section class="panel center is-focused">
+        <div class="tabs">
+          <span class="tab active"><span class="num">1</span><span class="glyph run"><Icon name="loader-2" /></span>auth-revamp<span class="num">2</span></span>
+          <span class="tab"><span class="num">2</span><span class="glyph done"><Icon name="check" /></span>review-api</span>
+          <span class="tab preview"><span class="preview-label">Preview</span><span class="preview-name">README.md</span></span>
+        </div>
+        <div class="windows">
+          <div class="win is-left focused">
+            <div class="win-bar">
+              <span class="glyph run"><Icon name="loader-2" /></span>
+              <span class="win-name">auth-revamp</span>
+              <span class="badge">Claude Code</span>
+              <span class="win-where">main</span>
+            </div>
+            <div class="console">
+              <p class="you">&gt; Rotate refresh tokens in the auth middleware</p>
+              <p><b class="ok">●</b> Read <span class="dim">src/auth/middleware.ts</span></p>
+              <p><b class="ok">●</b> Update <span class="dim">src/auth/refresh.ts</span></p>
+              <p class="diff del">&nbsp;&nbsp;- return issue(token)</p>
+              <p class="diff add">&nbsp;&nbsp;+ revoke(token.family)</p>
+              <p class="diff add">&nbsp;&nbsp;+ return issue(rotate(token))</p>
+              <p><b class="ok">●</b> Bash <span class="dim">npm test -- auth</span></p>
+              <p class="dim">&nbsp;&nbsp;⎿ 41 passed, 1 failed</p>
+              <p><b class="busy">✻</b> <span class="busy">Fixing the reuse check…</span> <span class="dim">(38s)</span></p>
+            </div>
+            <div class="prompt">
+              <div class="prompt-grid">
+                <p>Also cover a refresh token that is</p>
+                <p>reused after rotation<i class="cursor"></i></p>
+              </div>
+              <div class="prompt-foot">
+                <span class="target">auth-revamp · Claude Code</span>
+                <span class="spacer"></span>
+                <kbd>Ctrl+Enter</kbd> send
+              </div>
+            </div>
+          </div>
+          <div class="win is-right">
+            <div class="win-bar">
+              <span class="glyph done"><Icon name="check" /></span>
+              <span class="win-name">review-api</span>
+              <span class="badge">Codex</span>
+              <span class="win-where">main</span>
+            </div>
+            <div class="console">
+              <p class="you">› Check every handler for auth</p>
+              <p><b class="dim">•</b> Explored</p>
+              <p class="dim">&nbsp;&nbsp;└ Search requireAuth in src/routes</p>
+              <p><b class="dim">•</b> Two handlers skip the check:</p>
+              <p>&nbsp;&nbsp;1. <span class="code">GET /export</span></p>
+              <p>&nbsp;&nbsp;2. <span class="code">POST /webhooks/retry</span></p>
+              <p><b class="dim">•</b> Both are fixed in the diff below,</p>
+              <p>&nbsp;&nbsp;with a test for each.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel details">
+        <div class="sheets">
+          <span class="sheet active"><Icon name="info-circle" />Overview</span>
+          <span class="sheet"><Icon name="file-diff" /></span>
+          <span class="sheet"><Icon name="git-commit" /></span>
+          <span class="sheet"><Icon name="users-group" /></span>
+          <span class="sheet"><Icon name="link" /></span>
+        </div>
+        <div class="block">
+          <div class="title">auth-revamp <span class="state run">Working</span></div>
+          <dl class="facts">
+            <dt>Model</dt><dd>opus</dd>
+            <dt>Started</dt><dd>10:42</dd>
+            <dt>Last input</dt><dd>2m ago</dd>
+          </dl>
+          <div class="change"><Icon name="git-commit" />auth: rotate tokens <span class="dim">· 3 files</span></div>
+        </div>
+        <div class="block">
+          <div class="label">Running</div>
+          <div class="row"><span class="glyph run"><Icon name="loader-2" /></span><span class="name">Find the auth tests</span><span class="badge">Explore</span></div>
+          <div class="row mono"><span class="mark"><Icon name="terminal-2" /></span><span class="name">npm test -- auth</span></div>
+        </div>
+        <div class="block">
+          <div class="label">Usage</div>
+          <div class="meter"><span>Session</span><i style="--v: 38%; --c: var(--run)"></i><span class="dim">62% left</span></div>
+          <div class="meter"><span>Week</span><i style="--v: 61%; --c: var(--run)"></i><span class="dim">39% left</span></div>
+          <div class="meter"><span>Context</span><i style="--v: 24%; --c: var(--ctx)"></i><span class="dim">24%</span></div>
+        </div>
+        <div class="block">
+          <div class="label">This Mac</div>
+          <div class="meter"><span>CPU</span><i style="--v: 31%; --c: var(--ctx)"></i><span class="dim">31%</span></div>
+          <div class="meter"><span>Memory</span><i style="--v: 57%; --c: var(--done)"></i><span class="dim">18 / 32 GB</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="footer">
+      <span class="mode">INSERT</span>
+      <span class="status">Writing to auth-revamp</span>
+      <span class="spacer"></span>
+      <span class="hint"><kbd>Mod+j</kbd> next waiting</span>
+      <span class="hint"><kbd>Ctrl+q l</kbd> right</span>
+      <span class="hint"><kbd>F1</kbd> keys</span>
+    </div>
+  </div>
+  <figcaption>
+    Adroit's window: on the left the tree of sessions by repository and worktree, with the one waiting on you listed
+    again at the bottom; in the middle a Claude Code session and a Codex session side by side, each in its own
+    interface, with a prompt written in Neovim; on the right the details of the focused session and its usage.
+  </figcaption>
+</figure>
+
+<style>
+  /* The window is laid out at 1200 by 660 points; one --u is one of them. */
+  .shot {
+    container-type: inline-size;
+    margin: 0;
+  }
+  .app {
+    --u: calc(100cqw / 1200);
+    --ground: #131a24;
+    --panel: #192330;
+    --raised: #242d3a;
+    --select: #2f3843;
+    --line: #29323e;
+    --line-strong: #38404b;
+    --focus-line: #3d4550;
+    --focus-border: #4f5660;
+    --text: #cdcecf;
+    --text-2: #9b9ea2;
+    --text-3: #7c8187;
+    --wait: #dbc074;
+    --run: #719cd6;
+    --done: #81b29a;
+    --fail: #c94f6d;
+    --ctx: #63cdcf;
+    --wait-tint: rgba(232, 180, 94, 0.16);
+    --sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif;
+    --mono: var(--adroit-font-mono);
+
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 1200 / 660;
+    overflow: hidden;
+    border: 1px solid #000;
+    border-radius: calc(12 * var(--u));
+    color: var(--text);
+    background: var(--ground);
+    box-shadow:
+      0 calc(30 * var(--u)) calc(80 * var(--u)) rgb(0 0 0 / 0.28),
+      0 0 0 calc(1 * var(--u)) rgb(255 255 255 / 0.06) inset;
+    font-family: var(--sans);
+    font-size: calc(13 * var(--u));
+    line-height: 1.35;
+    text-align: left;
+  }
+  .app :global(.icon) {
+    display: inline-flex;
+    flex: none;
+  }
+  .app :global(.icon svg) {
+    width: calc(14 * var(--u));
+    height: calc(14 * var(--u));
+    stroke-width: 1.75;
+  }
+  .app p,
+  .app dl,
+  .app dd {
+    margin: 0;
+  }
+  .spacer {
+    flex: 1;
+  }
+  .dim {
+    color: var(--text-3);
+  }
+
+  .header {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: calc(14 * var(--u));
+    height: calc(40 * var(--u));
+    padding: 0 calc(16 * var(--u));
+  }
+  .lights {
+    display: flex;
+    gap: calc(8 * var(--u));
+    margin-right: calc(6 * var(--u));
+  }
+  .lights i {
+    width: calc(12 * var(--u));
+    height: calc(12 * var(--u));
+    border-radius: 50%;
+    background: #ff5f57;
+  }
+  .lights i:nth-child(2) {
+    background: #febc2e;
+  }
+  .lights i:nth-child(3) {
+    background: #28c840;
+  }
+  .toggle {
+    display: inline-flex;
+    color: var(--text-3);
+  }
+  .crumbs {
+    display: flex;
+    align-items: center;
+    gap: calc(6 * var(--u));
+    color: var(--text-2);
+    white-space: nowrap;
+  }
+  .crumb {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(6 * var(--u));
+  }
+  .crumb :global(.icon) {
+    color: var(--text-3);
+  }
+  .crumb.is-env {
+    color: var(--text);
+  }
+  .crumb.is-path {
+    font-family: var(--mono);
+    font-size: calc(12 * var(--u));
+  }
+  .sep {
+    display: inline-flex;
+    color: #5d636c;
+  }
+  .sep :global(.icon svg) {
+    width: calc(12 * var(--u));
+    height: calc(12 * var(--u));
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(6 * var(--u));
+    height: calc(22 * var(--u));
+    padding: 0 calc(10 * var(--u));
+    border-radius: calc(11 * var(--u));
+    font-size: calc(12 * var(--u));
+  }
+  .chip.is-wait {
+    background: rgba(232, 180, 94, 0.12);
+    color: var(--wait);
+    font-weight: 500;
+  }
+
+  .body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: calc(8 * var(--u));
+    padding: 0 calc(8 * var(--u));
+  }
+  .panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: calc(10 * var(--u));
+    background: var(--panel);
+  }
+  .panel.is-focused {
+    border-color: var(--focus-line);
+  }
+  .tree {
+    flex: none;
+    width: calc(248 * var(--u));
+  }
+  .center {
+    flex: 1;
+    min-width: 0;
+  }
+  .details {
+    flex: none;
+    width: calc(240 * var(--u));
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: calc(6 * var(--u));
+    margin-bottom: calc(8 * var(--u));
+    padding: calc(8 * var(--u)) calc(10 * var(--u));
+    border-bottom: 1px solid var(--line);
+  }
+  .filter {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: calc(6 * var(--u));
+    padding: calc(4 * var(--u)) calc(8 * var(--u));
+    border-radius: calc(6 * var(--u));
+    background: var(--raised);
+    color: var(--text-3);
+    font-size: calc(12 * var(--u));
+  }
+  .filter :global(.icon svg) {
+    width: calc(13 * var(--u));
+    height: calc(13 * var(--u));
+  }
+
+  .rows {
+    flex: 1;
+    min-height: 0;
+    padding: 0 calc(8 * var(--u)) calc(8 * var(--u));
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: calc(8 * var(--u));
+    height: calc(26 * var(--u));
+    padding: 0 calc(8 * var(--u));
+    border-radius: calc(6 * var(--u));
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .row .name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .row.d1 {
+    padding-left: calc(22 * var(--u));
+  }
+  .row.d2 {
+    padding-left: calc(36 * var(--u));
+  }
+  .row.d3 {
+    padding-left: calc(50 * var(--u));
+  }
+  .row.head {
+    font-weight: 500;
+  }
+  .row.group {
+    height: calc(24 * var(--u));
+    color: var(--text-3);
+    font-size: calc(11.5 * var(--u));
+    font-weight: 500;
+  }
+  .row.group .count {
+    color: var(--text-3);
+    font-family: var(--mono);
+    font-size: calc(10.5 * var(--u));
+  }
+  .row.mono .name {
+    font-family: var(--mono);
+    font-size: calc(12 * var(--u));
+  }
+  .row.env {
+    height: calc(30 * var(--u));
+    gap: calc(7 * var(--u));
+    font-weight: 500;
+    color: var(--text);
+  }
+  .row.env :global(.icon) {
+    color: var(--text-2);
+  }
+  .row.env .dot {
+    width: calc(7 * var(--u));
+    height: calc(7 * var(--u));
+    border-radius: 50%;
+    background: var(--done);
+  }
+  .row.shown {
+    border-radius: 0 calc(6 * var(--u)) calc(6 * var(--u)) 0;
+    background: rgba(120, 174, 232, 0.08);
+    box-shadow: inset calc(3 * var(--u)) 0 0 var(--run);
+  }
+  .row.shown .name {
+    font-weight: 600;
+  }
+  .mark {
+    display: inline-flex;
+    flex: none;
+    color: var(--text-3);
+  }
+  .row.head .mark {
+    color: var(--text-2);
+  }
+  .where,
+  .num {
+    flex: none;
+    font-family: var(--mono);
+    font-size: calc(10.5 * var(--u));
+  }
+  .where {
+    padding: 0 calc(5 * var(--u));
+    border-radius: calc(4 * var(--u));
+    background: var(--raised);
+    color: var(--text-3);
+    line-height: calc(16 * var(--u));
+  }
+  .row.shown .where {
+    background: rgba(120, 174, 232, 0.16);
+    color: var(--run);
+  }
+  .badge {
+    flex: none;
+    padding: 0 calc(5 * var(--u));
+    border: 1px solid var(--line);
+    border-radius: calc(4 * var(--u));
+    color: var(--text-2);
+    font-size: calc(10 * var(--u));
+    font-weight: 400;
+    line-height: calc(16 * var(--u));
+  }
+
+  .glyph {
+    display: inline-flex;
+    flex: none;
+  }
+  .glyph.wait {
+    color: var(--wait);
+  }
+  .glyph.run {
+    color: var(--run);
+  }
+  .glyph.done {
+    color: var(--done);
+  }
+  .glyph.idle {
+    color: var(--text-3);
+  }
+  .glyph.run :global(svg) {
+    animation: spin 1.8s linear infinite;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .divider {
+    flex: none;
+    height: 1px;
+    margin: calc(4 * var(--u)) calc(16 * var(--u));
+    background: var(--line);
+  }
+  .inbox {
+    flex: none;
+    padding: 0 calc(8 * var(--u)) calc(8 * var(--u));
+  }
+  .inbox .row {
+    align-items: flex-start;
+    height: auto;
+    padding: calc(7 * var(--u)) calc(10 * var(--u));
+    background: rgba(232, 180, 94, 0.07);
+  }
+  .inbox-text {
+    display: flex;
+    flex-direction: column;
+    gap: calc(2 * var(--u));
+  }
+  .inbox .sub {
+    color: var(--text-2);
+    font-size: calc(12 * var(--u));
+  }
+
+  .tabs {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: calc(4 * var(--u));
+    padding: calc(8 * var(--u)) calc(10 * var(--u));
+    border-bottom: 1px solid var(--line);
+  }
+  .tab {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(8 * var(--u));
+    height: calc(28 * var(--u));
+    padding: 0 calc(12 * var(--u));
+    border-radius: calc(7 * var(--u));
+    color: var(--text-2);
+    white-space: nowrap;
+  }
+  .tab .num {
+    color: var(--text-3);
+  }
+  .tab.active {
+    background: var(--select);
+    color: var(--text);
+    font-weight: 500;
+  }
+  .tab.preview {
+    position: relative;
+    gap: calc(6 * var(--u));
+    margin-left: calc(9 * var(--u));
+    padding: 0 calc(10 * var(--u));
+    border: 1px dashed var(--line-strong);
+    color: var(--text-3);
+  }
+  .tab.preview::before {
+    content: "";
+    position: absolute;
+    left: calc(-9 * var(--u));
+    top: calc(6 * var(--u));
+    bottom: calc(6 * var(--u));
+    width: 1px;
+    background: var(--line-strong);
+  }
+  .preview-label {
+    font-size: calc(10.5 * var(--u));
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .preview-name {
+    font-style: italic;
+  }
+
+  .windows {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: calc(6 * var(--u));
+    padding: calc(6 * var(--u));
+  }
+  .win {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: calc(8 * var(--u));
+    background: var(--ground);
+  }
+  .win.is-left {
+    flex: 1.22;
+  }
+  .win.is-right {
+    flex: 1;
+  }
+  .win.focused {
+    border-color: var(--focus-border);
+  }
+  .win-bar {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: calc(8 * var(--u));
+    height: calc(26 * var(--u));
+    padding: 0 calc(10 * var(--u));
+    border-bottom: 1px solid var(--line);
+    color: var(--text-2);
+    font-size: calc(12 * var(--u));
+    white-space: nowrap;
+  }
+  .win.focused .win-bar {
+    background: var(--raised);
+    color: var(--text);
+  }
+  .win.focused .win-name {
+    font-weight: 500;
+  }
+  .win-where {
+    color: var(--text-3);
+    font-family: var(--mono);
+    font-size: calc(11 * var(--u));
+  }
+
+  .console {
+    flex: 1;
+    min-height: 0;
+    padding: calc(10 * var(--u)) calc(12 * var(--u));
+    font-family: var(--mono);
+    font-size: calc(12 * var(--u));
+    line-height: calc(19 * var(--u));
+    white-space: pre;
+    overflow: hidden;
+  }
+  .console .you {
+    margin-bottom: calc(8 * var(--u));
+    color: var(--text-2);
+  }
+  .console b {
+    font-weight: 400;
+  }
+  .console .ok {
+    color: var(--done);
+  }
+  .console .busy {
+    color: #d7a472;
+  }
+  .console .add {
+    color: var(--done);
+    background: rgba(143, 198, 164, 0.07);
+  }
+  .console .del {
+    color: var(--fail);
+    background: rgba(235, 163, 170, 0.07);
+  }
+  .console .code {
+    color: var(--run);
+  }
+
+  .prompt {
+    position: absolute;
+    left: calc(12 * var(--u));
+    right: calc(12 * var(--u));
+    bottom: calc(12 * var(--u));
+    border: 1px solid var(--focus-border);
+    border-radius: calc(10 * var(--u));
+    background: var(--raised);
+    box-shadow: 0 calc(-6 * var(--u)) calc(30 * var(--u)) rgba(0, 0, 0, 0.45);
+  }
+  .prompt-grid {
+    padding: calc(10 * var(--u)) calc(14 * var(--u)) calc(4 * var(--u));
+    font-family: var(--mono);
+    font-size: calc(12.5 * var(--u));
+    line-height: calc(19 * var(--u));
+  }
+  .cursor {
+    display: inline-block;
+    width: calc(2 * var(--u));
+    height: calc(15 * var(--u));
+    margin-left: 1px;
+    vertical-align: calc(-3 * var(--u));
+    background: var(--text);
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  .prompt-foot {
+    display: flex;
+    align-items: center;
+    gap: calc(8 * var(--u));
+    padding: calc(2 * var(--u)) calc(12 * var(--u)) calc(7 * var(--u));
+    color: var(--text-3);
+    font-size: calc(11.5 * var(--u));
+  }
+  .prompt-foot .target {
+    color: var(--text-2);
+  }
+  kbd {
+    display: inline-block;
+    padding: 0 calc(5 * var(--u));
+    border: 1px solid var(--line-strong);
+    border-bottom-width: calc(2 * var(--u));
+    border-radius: calc(4 * var(--u));
+    background: var(--raised);
+    color: var(--text-2);
+    font-family: var(--mono);
+    font-size: calc(10.5 * var(--u));
+    line-height: calc(16 * var(--u));
+  }
+
+  .sheets {
+    flex: none;
+    display: flex;
+    gap: calc(2 * var(--u));
+    margin-bottom: calc(10 * var(--u));
+    padding: calc(8 * var(--u)) calc(10 * var(--u));
+    border-bottom: 1px solid var(--line);
+  }
+  .sheet {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(6 * var(--u));
+    height: calc(24 * var(--u));
+    padding: 0 calc(8 * var(--u));
+    border-radius: calc(6 * var(--u));
+    color: var(--text-3);
+    font-size: calc(12 * var(--u));
+  }
+  .sheet.active {
+    background: var(--select);
+    color: var(--text);
+    font-weight: 500;
+  }
+  .block {
+    display: flex;
+    flex-direction: column;
+    gap: calc(6 * var(--u));
+    padding: 0 calc(14 * var(--u)) calc(14 * var(--u));
+  }
+  .block .title {
+    display: flex;
+    align-items: center;
+    gap: calc(8 * var(--u));
+    font-size: calc(14 * var(--u));
+    font-weight: 600;
+  }
+  .state {
+    display: inline-flex;
+    align-items: center;
+    height: calc(18 * var(--u));
+    padding: 0 calc(7 * var(--u));
+    border-radius: calc(9 * var(--u));
+    font-size: calc(11.5 * var(--u));
+    font-weight: 500;
+  }
+  .state.run {
+    color: var(--run);
+    background: rgba(113, 156, 214, 0.14);
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: calc(2 * var(--u)) calc(12 * var(--u));
+    font-size: calc(12 * var(--u));
+  }
+  .facts dt {
+    color: var(--text-3);
+  }
+  .change {
+    display: flex;
+    align-items: center;
+    gap: calc(6 * var(--u));
+    padding: calc(6 * var(--u)) calc(8 * var(--u));
+    border-radius: calc(6 * var(--u));
+    background: var(--raised);
+    font-size: calc(12 * var(--u));
+    white-space: nowrap;
+  }
+  .change :global(.icon) {
+    color: var(--run);
+  }
+  .label {
+    color: var(--text-2);
+    font-size: calc(12 * var(--u));
+    font-weight: 500;
+  }
+  .block .row {
+    margin: 0 calc(-8 * var(--u));
+    font-size: calc(12.5 * var(--u));
+  }
+  .meter {
+    display: grid;
+    grid-template-columns: calc(52 * var(--u)) 1fr calc(62 * var(--u));
+    align-items: center;
+    gap: calc(8 * var(--u));
+    font-size: calc(11.5 * var(--u));
+  }
+  .meter .dim {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .meter i {
+    height: calc(5 * var(--u));
+    border-radius: calc(3 * var(--u));
+    background: linear-gradient(90deg, var(--c) var(--v), var(--raised) var(--v));
+  }
+
+  .footer {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: calc(14 * var(--u));
+    height: calc(30 * var(--u));
+    padding: 0 calc(16 * var(--u));
+    color: var(--text-3);
+    font-size: calc(11.5 * var(--u));
+    white-space: nowrap;
+  }
+  .mode {
+    display: inline-flex;
+    align-items: center;
+    height: calc(20 * var(--u));
+    padding: 0 calc(8 * var(--u));
+    border-radius: calc(5 * var(--u));
+    background: rgba(143, 198, 164, 0.14);
+    color: var(--done);
+    font-family: var(--mono);
+    font-size: calc(11 * var(--u));
+    font-weight: 500;
+  }
+  .footer .status {
+    color: var(--text-2);
+  }
+  .hint {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(5 * var(--u));
+  }
+
+  figcaption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glyph.run :global(svg),
+    .cursor {
+      animation: none;
+    }
+  }
+</style>

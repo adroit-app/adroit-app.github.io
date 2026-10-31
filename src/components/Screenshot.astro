@@ -1,0 +1,30 @@
+---
+// A screenshot of Adroit's window, taken once in each appearance, showing the
+// one that matches the page's theme.
+interface Props {
+  name: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+const { name, alt, width, height } = Astro.props;
+---
+
+<figure class="screenshot">
+  <img class="on-light" src={`/screenshots/${name}-light.png`} alt={alt} width={width} height={height} loading="lazy" />
+  <img class="on-dark" src={`/screenshots/${name}-dark.png`} alt={alt} width={width} height={height} loading="lazy" />
+</figure>
+
+<style>
+  .screenshot {
+    margin: 0;
+  }
+  img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    border-radius: 0.75rem;
+    box-shadow: 0 1.5rem 3rem -1.5rem rgb(0 0 0 / 0.35);
+  }
+</style>

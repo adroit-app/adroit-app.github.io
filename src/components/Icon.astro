@@ -1,0 +1,20 @@
+---
+// One of the Tabler icons Adroit's window draws, copied into src/icons/ with
+// their licence, inlined so it takes the colour of the text around it.
+interface Props {
+  name: string;
+}
+
+const icons = import.meta.glob<string>("../icons/*.svg", { query: "?raw", import: "default", eager: true });
+const source = icons[`../icons/${Astro.props.name}.svg`];
+if (!source) {
+  throw new Error(`no icon named ${Astro.props.name} in src/icons/`);
+}
+const svg = source
+  .replace(/<!--[\s\S]*?-->/, "")
+  .replace(/\s(width|height)="24"/g, "")
+  .replace("<svg", '<svg aria-hidden="true" focusable="false"')
+  .trim();
+---
+
+<span class="icon" set:html={svg} />

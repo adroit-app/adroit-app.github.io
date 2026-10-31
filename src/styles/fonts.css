@@ -1,0 +1,12 @@
+/* Outfit is the face the wordmark is drawn from (adroit-brand README), so it
+   carries the headings; IBM Plex Sans, a grotesque with a technical cut,
+   carries the reading; JetBrains Mono is the face Adroit's console draws in. */
+@import "@fontsource-variable/outfit/index.css";
+@import "@fontsource-variable/ibm-plex-sans/index.css";
+@import "@fontsource-variable/jetbrains-mono/index.css";
+
+:root {
+  --adroit-font-display: "Outfit Variable", system-ui, -apple-system, sans-serif;
+  --adroit-font-body: "IBM Plex Sans Variable", system-ui, -apple-system, sans-serif;
+  --adroit-font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}

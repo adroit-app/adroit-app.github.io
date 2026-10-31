@@ -1,0 +1,64 @@
+/* Starlight's palette, rebuilt from the brand's charcoal #3B3D38 and ivory
+   #F1EDE2, with the app's own blue (#719CD6, what is running and what is
+   shown) as the accent. Starlight names its scale from the dark theme, so in
+   light mode --sl-color-white is the ink and --sl-color-black is the paper. */
+:root {
+  --sl-font: var(--adroit-font-body);
+  --sl-font-mono: var(--adroit-font-mono);
+
+  --sl-color-accent-low: #1d2a3d;
+  --sl-color-accent: #8fb1e0;
+  --sl-color-accent-high: #d6e3f5;
+  --sl-color-white: #f1ede2;
+  --sl-color-gray-1: #dcd8cd;
+  --sl-color-gray-2: #b9b5aa;
+  --sl-color-gray-3: #8e8b82;
+  --sl-color-gray-4: #64625b;
+  --sl-color-gray-5: #45463f;
+  --sl-color-gray-6: #2c2d29;
+  --sl-color-black: #1d1e1b;
+}
+
+:root[data-theme="light"] {
+  --sl-color-accent-low: #dde7f5;
+  --sl-color-accent: #34609c;
+  --sl-color-accent-high: #1e3a62;
+  --sl-color-white: #2a2b27;
+  --sl-color-gray-1: #3b3d38;
+  --sl-color-gray-2: #54564f;
+  --sl-color-gray-3: #6e6f67;
+  --sl-color-gray-4: #9a988e;
+  --sl-color-gray-5: #d6d1c3;
+  --sl-color-gray-6: #ebe6d9;
+  --sl-color-gray-7: #f4f1e8;
+  --sl-color-black: #faf8f2;
+}
+
+.sl-markdown-content {
+  line-height: 1.75;
+}
+
+.sl-markdown-content :is(h1, h2, h3, h4),
+h1#_top {
+  font-family: var(--adroit-font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.sl-markdown-content > :is(p, ul, ol) {
+  max-width: 42rem;
+}
+
+.sl-markdown-content kbd {
+  padding: 0.05em 0.45em;
+  border: 1.5px solid var(--sl-color-gray-4);
+  border-bottom-width: 3px;
+  border-radius: 0.4em;
+  font-family: var(--adroit-font-mono);
+  font-size: 0.82em;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--sl-color-white);
+  background: var(--sl-color-black);
+}

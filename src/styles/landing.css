@@ -1,0 +1,507 @@
+/* The landing page. Its paper and ink are the brand's ivory and charcoal
+   (adroit-brand README); --rule, --wash and --muted are tints of them, not new
+   hues. The accent is the app's own blue, and the one dark band is the app's
+   ground (#131A24), so the window drawn on the page sits in its own colours. */
+:root {
+  color-scheme: light;
+  --paper: #f7f4ec;
+  --ink: #2a2b27;
+  --charcoal: #3b3d38;
+  --ivory: #f1ede2;
+  --muted: #5e5f58;
+  --rule: #ddd7c8;
+  --wash: #ece7da;
+  --link: #34609c;
+  --accent: #719cd6;
+  --wait: #a9821f;
+  --band: #131a24;
+  --measure: 38rem;
+  --page: 76rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #232421;
+    --ink: #f1ede2;
+    --muted: #b6b2a7;
+    --rule: #42443e;
+    --wash: #2c2d29;
+    --link: #9dbbe5;
+    --wait: #dbc074;
+    --band: #131a24;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #232421;
+  --ink: #f1ede2;
+  --muted: #b6b2a7;
+  --rule: #42443e;
+  --wash: #2c2d29;
+  --link: #9dbbe5;
+  --wait: #dbc074;
+  --band: #131a24;
+}
+
+.on-dark {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .on-light {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .on-dark {
+    display: revert;
+  }
+}
+:root[data-theme="dark"] .on-light {
+  display: none;
+}
+:root[data-theme="dark"] .on-dark {
+  display: revert;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--adroit-font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--link);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em;
+}
+a:focus-visible,
+.button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 0.4rem;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  text-wrap: balance;
+  font-family: var(--adroit-font-display);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+code,
+pre {
+  font-family: var(--adroit-font-mono);
+  font-size: 0.86em;
+}
+
+kbd {
+  display: inline-block;
+  padding: 0.05em 0.45em;
+  border: 1.5px solid var(--rule);
+  border-bottom-width: 3px;
+  border-radius: 0.4em;
+  font-family: var(--adroit-font-mono);
+  font-size: 0.8em;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.skip {
+  position: absolute;
+  left: -100vw;
+}
+.skip:focus {
+  left: var(--gutter);
+  top: 0.75rem;
+  z-index: 1;
+  padding: 0.25rem 0.75rem;
+  background: var(--paper);
+}
+
+.site-header,
+main > section,
+.site-footer {
+  width: 100%;
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.25rem;
+}
+.brand {
+  display: inline-flex;
+}
+.brand img {
+  width: auto;
+  height: 2.1rem;
+}
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.25rem 1.5rem;
+  font-size: 0.95rem;
+}
+.site-nav a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.site-nav a:hover {
+  color: var(--link);
+}
+
+/* Hero: the claim set wide over the window it describes. */
+.hero {
+  padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(2rem, 4vw, 3rem);
+  text-align: center;
+}
+.eyebrow {
+  margin: 0 0 1.25rem;
+  font-family: var(--adroit-font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+.hero h1 {
+  max-width: 15ch;
+  margin-inline: auto;
+  font-size: clamp(2.6rem, 6.4vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--link);
+}
+.lede {
+  max-width: 40rem;
+  margin: 1.5rem auto 0;
+  font-size: 1.15rem;
+  color: var(--muted);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.hero .actions {
+  justify-content: center;
+}
+.button {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  border: 1.5px solid var(--rule);
+  border-radius: 0.6rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--ink);
+  background: transparent;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+.button:hover {
+  border-color: var(--ink);
+}
+.button.is-primary {
+  border-color: var(--ink);
+  color: var(--paper);
+  background: var(--ink);
+}
+.button.is-primary:hover {
+  border-color: var(--muted);
+  background: var(--muted);
+}
+.fine {
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+main > section.window {
+  max-width: calc(var(--page) + 6rem);
+}
+
+main > section + section {
+  padding-top: clamp(3.5rem, 8vw, 6.5rem);
+}
+main > section.window + section {
+  padding-top: clamp(4rem, 9vw, 7.5rem);
+}
+main > section:last-child {
+  padding-bottom: clamp(3.5rem, 8vw, 6.5rem);
+}
+main h2 {
+  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+}
+.section-lede {
+  max-width: var(--measure);
+  margin: 1rem 0 0;
+  color: var(--muted);
+}
+
+/* The three things Adroit is chosen for, numbered as the concept ranks them. */
+.pillar-list {
+  list-style: none;
+  counter-reset: pillar;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  margin: 2.75rem 0 0;
+  padding: 0;
+}
+.pillar-list li {
+  counter-increment: pillar;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--ink);
+}
+.pillar-list li::before {
+  content: "0" counter(pillar);
+  margin-bottom: 0.75rem;
+  font-family: var(--adroit-font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.pillar-list h3 {
+  font-size: 1.55rem;
+}
+.pillar-list p {
+  margin: 0.6rem 0 0;
+  color: var(--muted);
+}
+.keys {
+  display: grid;
+  gap: 0.5rem;
+  margin: auto 0 0;
+  padding-top: 1.25rem;
+}
+.keys div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  font-size: 0.92rem;
+}
+.keys dt {
+  display: flex;
+  gap: 0.25rem;
+}
+.keys dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+.ground-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  margin: 2.5rem 0 0;
+  padding: 0;
+  border-top: 1.5px solid var(--rule);
+}
+.ground-list li {
+  padding: 1.5rem 1.5rem 1.75rem 0;
+  border-bottom: 1.5px solid var(--rule);
+}
+.ground-list h3 {
+  font-size: 1.3rem;
+}
+.ground-list h3 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.ground-list h3 a:hover {
+  color: var(--link);
+}
+.ground-list p {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+}
+
+/* Prose beside a screenshot of the window; flipped, the screenshot leads, so
+   two in a row do not stack on the same side. */
+.tree-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+.tree-section.is-flipped {
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+}
+.tree-section.is-flipped > .tree-copy {
+  order: 1;
+}
+.tree-copy p {
+  max-width: var(--measure);
+  margin: 1rem 0 0;
+  color: var(--muted);
+}
+
+.not-list {
+  list-style: none;
+  max-width: 48rem;
+  margin: 2rem 0 0;
+  padding: 0;
+}
+.not-list li {
+  padding-block: 0.9rem;
+  border-top: 1.5px solid var(--rule);
+}
+.not-list li:last-child {
+  border-bottom: 1.5px solid var(--rule);
+}
+.not-list strong {
+  font-weight: 600;
+}
+.more {
+  margin: 1.5rem 0 0;
+}
+
+/* Install sits on the app's ground: the one band of the page in the window's
+   own dark, whatever the theme. */
+.install {
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3.5rem);
+  border-radius: 1.25rem;
+  color: #f1ede2;
+  background: var(--band);
+}
+.install h2 {
+  color: #f1ede2;
+}
+.install .section-lede {
+  color: rgb(241 237 226 / 0.75);
+}
+.install .section-lede code {
+  color: #f1ede2;
+}
+.install .button {
+  border-color: rgb(241 237 226 / 0.3);
+  color: #f1ede2;
+}
+.install .button:hover {
+  border-color: #f1ede2;
+}
+.install .button.is-primary {
+  border-color: #f1ede2;
+  color: #131a24;
+  background: #f1ede2;
+}
+.install .button.is-primary:hover {
+  border-color: #dcd8cd;
+  background: #dcd8cd;
+}
+.install-ways {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.install-way {
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #29323e;
+  border-radius: 0.8rem;
+  background: #192330;
+}
+.install-way h3 {
+  font-size: 1.3rem;
+  color: #f1ede2;
+}
+.install-way p {
+  margin: 0.5rem 0 0;
+  color: rgb(241 237 226 / 0.75);
+  font-size: 0.95rem;
+}
+.install-way code {
+  display: block;
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.5rem;
+  color: #cdcecf;
+  background: #131a24;
+  overflow-wrap: anywhere;
+}
+
+.site-footer {
+  display: grid;
+  gap: 1.25rem;
+  padding-block: 2.5rem 3rem;
+  border-top: 1.5px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.footer-brand p {
+  margin: 0;
+}
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+}
+.footer-nav a {
+  color: var(--ink);
+}
+.footer-legal {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 52rem) {
+  .tree-section,
+  .tree-section.is-flipped {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tree-section.is-flipped > .tree-copy {
+    order: 0;
+  }
+}
+
+@media (max-width: 30rem) {
+  .site-nav a[href^="https://github.com"] {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
