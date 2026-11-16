@@ -44,10 +44,12 @@ export default defineConfig({
           label: "Using Adroit",
           items: [
             { label: "The window", slug: "docs/window" },
+            { label: "The details panel", slug: "docs/details" },
             { label: "The prompt", slug: "docs/prompt" },
             { label: "Keys", slug: "docs/keys" },
             { label: "Agents and profiles", slug: "docs/agents" },
             { label: "Shells and terminals", slug: "docs/terminals" },
+            { label: "Pull requests and issues", slug: "docs/github" },
           ],
         },
         {

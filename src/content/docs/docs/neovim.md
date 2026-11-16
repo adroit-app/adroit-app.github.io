@@ -13,8 +13,8 @@ itself.
 | The prompt | `~/.config/adroit/prompt/nvim/init.lua` |
 | The console reader | `~/.config/adroit/console/nvim/init.lua` |
 
-**Settings › Prompt** and **Settings › Console** name each folder, copy its
-path, show it in the Finder, and edit its `init.lua` in a Neovim of the
+The **Console panel** page of Settings names each folder, and copies its
+path, shows it in the Finder, or edits its `init.lua` in a Neovim of the
 window. Saving a configuration while its Neovim runs starts it again: the
 prompt keeps what is written and the cursor, and the reader where it was
 scrolled to.
@@ -57,3 +57,19 @@ agent's commands after `/`, comes from a language server named `adroit`,
 attached to the prompt's buffer and shown by Neovim's own completion. To use
 a completion plugin of your own instead, set `g:adroit_autocomplete` to
 false; the plugin finds the offers as that language server's completion.
+
+## Neovim in the console's theme
+
+A Neovim run in Adroit, opened from the tree or started in a shell, keeps the
+colour scheme its own configuration chooses. To have it draw in the theme of
+the console instead, and follow the theme as it changes, add this to the
+Neovim configuration on the machine where the work runs:
+
+```vim
+if exists('$ADROIT_THEME_FILE') | colorscheme adroit | endif
+```
+
+The `adroit` colour scheme comes with Adroit; nothing needs to be installed.
+It sets `'background'` by the theme's kind and draws Neovim's default
+highlights in the theme's colours. Choosing another colour scheme stops it
+following the theme.

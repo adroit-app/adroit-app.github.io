@@ -82,7 +82,8 @@ What that keeps a session to depends on its agent:
 
 **Claude Code** gets the most: Adroit can take its suggested prompt into the
 prompt with <kbd>Tab</kbd>, a `!` line runs in its bash mode, and the details
-list the subagents it sets to work.
+list the subagents it sets to work. It is reminded of its session's name, and
+of an empty timeline, with each prompt you send.
 
 **Codex** reports its working and waiting states, including permission and
 question prompts, through the terminal. Its menus and approvals take keys
@@ -96,6 +97,55 @@ profile can name a model of a server of your own, such as `ollama/qwen3:8b`.
 **OpenCode** needs version 2.1 or later of `@opencode/cli`. Each session runs
 with a server of its own. It can use a local model too.
 
-Every agent's sessions list the links and files their conversation brought up
-in the details' **Resources** sheet, and every one can
-[open sessions](/docs/opening-sessions/) and talk with the others.
+Every agent's sessions list the prompts sent to them, and the links, files
+and images their conversation brought up, in the [details](/docs/details/);
+every one records a [timeline](/docs/details/#the-timeline), names its
+session, and can [open sessions](/docs/opening-sessions/) and talk with the
+others.
+
+In the console, <kbd>Ctrl+Enter</kbd>, which sends the prompt, reaches the
+agent as <kbd>Enter</kbd>.
+
+## Screen rules
+
+When an agent's program reports no state, Adroit reads how the session stands
+from its screen: working, idle, or waiting on an approval or a choice, and
+whether a dialog of the agent's own holds the keys. A request on the screen
+wins over a report that it is working, and work still running after a turn
+ends, such as subagents or shells, shows the session as in the background.
+
+It reads the screen by a set of rules for each agent, written as data. A file
+`~/.config/adroit/screen-rules/<agent>.toml` on the machine where the
+sessions run replaces the whole set Adroit carries for `claude`, `codex`,
+`pi` or `opencode`, and is read again as soon as it changes. Adroit's own sets,
+under `crates/agents/rules/` in its source, are a starting point:
+
+```toml
+agent = "codex"
+
+[lines]
+chevron = '^\s*›'
+interrupt = '^\s*• .*esc to interrupt'
+
+[regions]
+composer = { last = "chevron" }
+above = { before = "composer" }
+footer = { within = "above", since = "chevron" }
+
+[[rules]]
+id = "interrupt_hint"
+state = "working"
+when = { in = "footer", has = "interrupt" }
+
+[[rules]]
+id = "composer_idle"
+state = "idle"
+default = true
+shows = "composer"
+```
+
+A file that cannot be used is set aside, and Adroit's own set reads the
+screen instead. `adroit session explain <session>` names the set in force, the
+rule that decided the state and the rows it went by. The
+[format](https://github.com/adroit-app/Adroit/blob/main/docs/spec/screen-rules.md)
+is described in full in Adroit's specification.

@@ -37,32 +37,47 @@ const pillars = [
 const ground = [
   {
     title: "Waiting on you, first",
-    body: "Sessions that wait on an answer or a permission are listed again at the bottom of the tree, across every repository, one key apart.",
+    body: "Sessions that wait on an answer or a permission are listed again at the bottom of the tree, across every repository, one key apart. The picker lists them first too.",
     href: "/docs/window/#the-tree",
   },
   {
     title: "Sessions outlive the window",
-    body: "Sessions and shells run in hosts of their own. Close Adroit and they keep going; open it again, or several windows at once, and they are as they were.",
-    href: "/docs/window/",
+    body: "Sessions and shells run in hosts of their own. Close Adroit and they keep going; open it again, or several windows at once, and they are as they were. If the host itself goes, Adroit offers to bring them back.",
+    href: "/docs/getting-started/#when-the-host-goes",
   },
   {
     title: "Grouped the way git is",
-    body: "Sessions sit under the repository and worktree they run in, with the worktree's files and shells beside them. Nothing has to be named before the first prompt.",
-    href: "/docs/getting-started/",
+    body: "Sessions sit under the repository they run in, with its terminals and worktrees, each worktree's files beside them. The agent names each session once it knows what the work is.",
+    href: "/docs/window/#the-tree",
+  },
+  {
+    title: "A plan you can follow",
+    body: "Every agent records the plan of its work as a timeline of tasks, and marks each one as it goes. See where a session stands without reading its whole console.",
+    href: "/docs/details/#the-timeline",
   },
   {
     title: "The work at hand to read",
-    body: "The details panel shows the session's state, its changes and log through git or jj, the agents it worked with, the files and links it brought up, and its usage.",
-    href: "/docs/window/#the-details-panel",
+    body: "The details panel shows the session, its changes and log through git or jj, its prompts and messages, the files and links it brought up, and its usage, arranged as you like.",
+    href: "/docs/details/",
+  },
+  {
+    title: "Pull requests and issues",
+    body: "A repository on GitHub lists its open pull requests and issues in the tree. Read one in a tab, with its diffs and checks, or start a session on it in a worktree of its own.",
+    href: "/docs/github/",
   },
   {
     title: "Sessions beside sessions",
-    body: "Every session can open another for a separate line of work, in a worktree of its own, and talk with the others as peers. Each one still answers to you.",
+    body: "A session can open another for a line of work you will want to steer, in a worktree of its own, and talk with the others as peers. Each one still answers to you.",
     href: "/docs/opening-sessions/",
   },
   {
+    title: "Documents, drawn",
+    body: "Markdown documents open in a viewer drawn in Adroit's theme, diagrams and formulas included, and switch to Neovim with one key. Images open in a lightbox.",
+    href: "/docs/window/#viewers",
+  },
+  {
     title: "On another machine",
-    body: "Pair with a work machine and its sessions appear in the same tree, beside this Mac's. Close the lid; the work goes on there.",
+    body: "Pair with a work machine and its sessions appear in the same tree, beside this Mac's, from any computer that joins it. Close the lid; the work goes on there.",
     href: "/docs/environments/",
   },
 ];
@@ -118,7 +133,7 @@ const ground = [
           <a class="button is-primary" href="#install">Install Adroit</a>
           <a class="button" href="/docs/">Read the docs</a>
         </div>
-        <p class="fine">Free and open source · macOS, with headless hosts for Linux · Early, expect rough edges</p>
+        <p class="fine">Free and open source · macOS on Apple silicon, Windows from source, headless hosts for Linux · Early, expect rough edges</p>
       </section>
 
       <section class="window" aria-label="Adroit's window">
@@ -177,19 +192,24 @@ const ground = [
           <h2 id="tree-title">Start by choosing where. Nothing else.</h2>
           <p>
             Press <kbd>Mod+p</kbd>, pick a directory from those already in use, from your ghq repositories or from a file
-            tree, and write the first prompt. The session is named from it, and lands in the tree under its repository and
-            worktree.
+            tree, and write the first prompt. The session lands in the tree under its repository, and its agent names it
+            once it knows what the work is.
           </p>
           <p>
             No project to set up, no task to declare. What the work turns out to be shows as you go. With no directory at
-            all, a <a href="/docs/getting-started/#scratch-sessions">scratch session</a> gets a folder of its own.
+            all, a <a href="/docs/getting-started/#scratch-sessions">scratch session</a> talks it through and hands the work to a
+            session in the project once it turns into one.
+          </p>
+          <p>
+            Not cloned yet? Type <code>github.com/owner/repo</code>, or <code>github:</code> to look through GitHub, and the
+            picker clones it with ghq.
           </p>
         </div>
         <Screenshot
           name="picker"
-          alt="Adroit's picker, titled Go to a session, or start one, with api typed and the ghq repositories acme/api and acme/api-client offered to start in."
+          alt="Adroit's picker, titled Go to a session, or start one, with github.com/acme/web typed: two ghq repositories offered to start in, and a row to clone github.com/acme/web with ghq."
           width={1600}
-          height={1050}
+          height={1053}
         />
       </section>
 
@@ -209,9 +229,53 @@ const ground = [
         </div>
         <Screenshot
           name="console"
-          alt="Adroit's window with a shell named build open under the api repository in the tree, showing cargo run compiling and running the project, and the repository's latest commit in the details panel."
+          alt="Adroit's window with the api repository's terminals in the tree, a cargo run terminal serving requests split above a shell showing git status and log, and the details panel on its Overview tab with the machine's meters."
           width={1600}
-          height={1050}
+          height={1053}
+        />
+      </section>
+
+      <section class="tree-section" aria-labelledby="docs-title">
+        <div class="tree-copy">
+          <h2 id="docs-title">Read what the work wrote.</h2>
+          <p>
+            A Markdown document opens in a viewer drawn in Adroit's theme, as GitHub would draw it: tables, highlighted
+            code, alerts, formulas and Mermaid diagrams included. It follows the file as the agent changes it, at the place
+            you were reading.
+          </p>
+          <p>
+            Press <kbd>e</kbd> and the same window switches to Neovim on the document, and back. Images a session draws
+            open in a lightbox, one key from the next.
+          </p>
+          <p class="more"><a href="/docs/window/#viewers">Viewers</a></p>
+        </div>
+        <Screenshot
+          name="markdown"
+          alt="The api repository's README.md opened from the tree's Files in Adroit's Markdown viewer, showing code blocks, a table of endpoints and a flowchart drawn from Mermaid, beside the tree with changed files marked."
+          width={1600}
+          height={1053}
+        />
+      </section>
+
+      <section class="tree-section is-flipped" aria-labelledby="panel-title">
+        <div class="tree-copy">
+          <h2 id="panel-title">The details, arranged your way.</h2>
+          <p>
+            The details panel tells about what you are looking at: the session and its change, the timeline its agent
+            records, its prompts and messages, the files and links it brought up, the account's limits and the machine's
+            load.
+          </p>
+          <p>
+            Each of these is a component. Drag them onto tabs of your own, or onto the foot shown under every tab, on a
+            picture of the panel in Settings.
+          </p>
+          <p class="more"><a href="/docs/details/">The details panel</a></p>
+        </div>
+        <Screenshot
+          name="settings"
+          alt="Adroit's Settings window on Details panel: a picture of the panel's Overview tab with a sample session and a foot of context, limits, CPU and memory, beside the tab's name and icon and the list of components to drag onto it."
+          width={1600}
+          height={1186}
         />
       </section>
 
@@ -238,19 +302,19 @@ const ground = [
         <div class="install">
           <h2 id="install-title">Install</h2>
           <p class="section-lede">
-            Adroit is early and has no release yet: build it from source. It needs git and at least one supported agent on
-            your <code>PATH</code>. jj and ghq are used when installed.
+            Adroit needs git and at least one supported agent on your <code>PATH</code>. jj, ghq and the GitHub CLI are
+            used when installed.
           </p>
           <div class="install-ways">
             <div class="install-way">
-              <h3>The macOS app</h3>
-              <p>Build Adroit.app with Nix and install it into Applications.</p>
-              <code>nix develop -c just install-macos</code>
+              <h3>Homebrew</h3>
+              <p>The released app, for Apple silicon Macs.</p>
+              <code>brew install --cask adroit-app/tap/adroit</code>
             </div>
             <div class="install-way">
-              <h3>Run from the source</h3>
-              <p>Build and open a window straight from a checkout.</p>
-              <code>nix develop -c cargo run --release -p adroit</code>
+              <h3>Nix</h3>
+              <p>The same build from the flake, prebuilt in Cachix.</p>
+              <code>nix profile install github:adroit-app/Adroit</code>
             </div>
           </div>
           <div class="actions">
