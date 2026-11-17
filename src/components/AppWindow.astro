@@ -36,22 +36,22 @@ import Icon from "./Icon.astro";
         <div class="rows">
           <div class="row env"><Icon name="device-desktop" /><span class="name">This Mac</span><i class="dot"></i></div>
           <div class="row head"><span class="mark"><Icon name="folder-open" /></span><span class="name">api</span></div>
-          <div class="row head d1"><span class="mark"><Icon name="git-branch" /></span><span class="name">main</span></div>
-          <div class="row group d2"><span class="mark"><Icon name="chevron-right" /></span>Files</div>
-          <div class="row group d2"><span class="mark"><Icon name="chevron-down" /></span>Sessions <span class="count">2</span></div>
-          <div class="row d3 shown">
-            <span class="glyph run"><Icon name="loader-2" /></span><span class="name">auth-revamp</span><span class="where">1</span>
+          <div class="row group d1"><span class="mark"><Icon name="chevron-down" /></span>Sessions <span class="count">3</span></div>
+          <div class="row d2 shown">
+            <span class="glyph run"><Icon name="loader-2" /></span><span class="name">auth-revamp</span><span class="code">k3qz</span><span class="where">1</span>
           </div>
-          <div class="row d3">
+          <div class="row d2">
             <span class="glyph done"><Icon name="check" /></span><span class="name">review-api</span><span class="badge">Codex</span><span class="where">2</span>
           </div>
-          <div class="row group d2"><span class="mark"><Icon name="chevron-down" /></span>Terminals <span class="count">1</span></div>
-          <div class="row d3 mono"><span class="mark"><Icon name="terminal-2" /></span><span class="name">dev-server</span></div>
-          <div class="row head d1"><span class="mark"><Icon name="git-branch" /></span><span class="name">feat/oauth</span></div>
-          <div class="row group d2"><span class="mark"><Icon name="chevron-down" /></span>Sessions <span class="count">1</span></div>
-          <div class="row d3">
+          <div class="row d2">
             <span class="glyph wait"><Icon name="bell" /></span><span class="name">implement</span><span class="badge">Pi</span>
           </div>
+          <div class="row group d1"><span class="mark"><Icon name="chevron-down" /></span>Terminals <span class="count">1</span></div>
+          <div class="row d2 mono"><span class="mark"><Icon name="terminal-2" /></span><span class="name">dev-server</span></div>
+          <div class="row group d1"><span class="mark"><Icon name="chevron-right" /></span>Pull Requests <span class="count">3</span></div>
+          <div class="row group d1"><span class="mark"><Icon name="chevron-right" /></span>Issues <span class="count">12</span></div>
+          <div class="row head d1"><span class="mark"><Icon name="git-branch" /></span><span class="name">main</span></div>
+          <div class="row head d1"><span class="mark"><Icon name="git-branch" /></span><span class="name">feat/oauth</span></div>
           <div class="row head"><span class="mark"><Icon name="folder-open" /></span><span class="name">notes</span></div>
           <div class="row group d1"><span class="mark"><Icon name="chevron-down" /></span>Sessions <span class="count">1</span></div>
           <div class="row d2">
@@ -74,7 +74,7 @@ import Icon from "./Icon.astro";
         <div class="tabs">
           <span class="tab active"><span class="num">1</span><span class="glyph run"><Icon name="loader-2" /></span>auth-revamp<span class="num">2</span></span>
           <span class="tab"><span class="num">2</span><span class="glyph done"><Icon name="check" /></span>review-api</span>
-          <span class="tab preview"><span class="preview-label">Preview</span><span class="preview-name">README.md</span></span>
+          <span class="tab"><span class="num">3</span><span class="mark"><Icon name="file" /></span>README.md</span>
         </div>
         <div class="windows">
           <div class="win is-left focused">
@@ -130,10 +130,10 @@ import Icon from "./Icon.astro";
 
       <aside class="panel details">
         <div class="sheets">
-          <span class="sheet active"><Icon name="info-circle" />Overview</span>
-          <span class="sheet"><Icon name="file-diff" /></span>
-          <span class="sheet"><Icon name="git-commit" /></span>
-          <span class="sheet"><Icon name="users-group" /></span>
+          <span class="sheet active"><Icon name="layout-dashboard" />Overview</span>
+          <span class="sheet"><Icon name="git-branch" /></span>
+          <span class="sheet"><Icon name="timeline-event" /></span>
+          <span class="sheet"><Icon name="message" /></span>
           <span class="sheet"><Icon name="link" /></span>
         </div>
         <div class="block">
@@ -143,21 +143,28 @@ import Icon from "./Icon.astro";
             <dt>Started</dt><dd>10:42</dd>
             <dt>Last input</dt><dd>2m ago</dd>
           </dl>
-          <div class="change"><Icon name="git-commit" />auth: rotate tokens <span class="dim">· 3 files</span></div>
+          <div class="change"><Icon name="git-branch" />auth: rotate tokens <span class="dim">· 3 files</span></div>
+        </div>
+        <div class="block">
+          <div class="label">Timeline</div>
+          <div class="card">
+            <div class="card-head"><span class="glyph run"><Icon name="loader-2" /></span><span class="name">Rotate refresh tokens</span><span class="dim">60%</span></div>
+            <i class="progress" style="--p-done: 60%; --p-run: 20%"></i>
+            <div class="card-sub dim">3 / 5 tasks · 14m</div>
+          </div>
+          <div class="task"><span class="glyph done"><Icon name="check" /></span><span class="name">Find every issuer</span></div>
+          <div class="task"><span class="glyph done"><Icon name="check" /></span><span class="name">Revoke the family on reuse</span></div>
+          <div class="task"><span class="glyph run"><Icon name="loader-2" /></span><span class="name">Fix the reuse test</span></div>
+          <div class="task"><span class="glyph idle"><Icon name="circle" /></span><span class="name">Update the API docs</span></div>
         </div>
         <div class="block">
           <div class="label">Running</div>
           <div class="row"><span class="glyph run"><Icon name="loader-2" /></span><span class="name">Find the auth tests</span><span class="badge">Explore</span></div>
           <div class="row mono"><span class="mark"><Icon name="terminal-2" /></span><span class="name">npm test -- auth</span></div>
         </div>
-        <div class="block">
-          <div class="label">Usage</div>
-          <div class="meter"><span>Session</span><i style="--v: 38%; --c: var(--run)"></i><span class="dim">62% left</span></div>
-          <div class="meter"><span>Week</span><i style="--v: 61%; --c: var(--run)"></i><span class="dim">39% left</span></div>
+        <div class="block foot">
           <div class="meter"><span>Context</span><i style="--v: 24%; --c: var(--ctx)"></i><span class="dim">24%</span></div>
-        </div>
-        <div class="block">
-          <div class="label">This Mac</div>
+          <div class="meter"><span>Session</span><i style="--v: 38%; --c: var(--run)"></i><span class="dim">62% left</span></div>
           <div class="meter"><span>CPU</span><i style="--v: 31%; --c: var(--ctx)"></i><span class="dim">31%</span></div>
           <div class="meter"><span>Memory</span><i style="--v: 57%; --c: var(--done)"></i><span class="dim">18 / 32 GB</span></div>
         </div>
@@ -174,9 +181,10 @@ import Icon from "./Icon.astro";
     </div>
   </div>
   <figcaption>
-    Adroit's window: on the left the tree of sessions by repository and worktree, with the one waiting on you listed
-    again at the bottom; in the middle a Claude Code session and a Codex session side by side, each in its own
-    interface, with a prompt written in Neovim; on the right the details of the focused session and its usage.
+    Adroit's window: on the left the tree of sessions by repository, with its terminals, pull requests, issues and
+    worktrees, and the session waiting on you listed again at the bottom; in the middle a Claude Code session and a
+    Codex session side by side, each in its own interface, with a prompt written in Neovim; on the right the details of
+    the focused session, the timeline its agent records of its work, and its usage.
   </figcaption>
 </figure>
 
@@ -465,6 +473,12 @@ import Icon from "./Icon.astro";
     color: var(--text-3);
     line-height: calc(16 * var(--u));
   }
+  .row .code {
+    flex: none;
+    color: var(--text-3);
+    font-family: var(--mono);
+    font-size: calc(10.5 * var(--u));
+  }
   .row.shown .where {
     background: rgba(120, 174, 232, 0.16);
     color: var(--run);
@@ -557,30 +571,9 @@ import Icon from "./Icon.astro";
     color: var(--text);
     font-weight: 500;
   }
-  .tab.preview {
-    position: relative;
-    gap: calc(6 * var(--u));
-    margin-left: calc(9 * var(--u));
-    padding: 0 calc(10 * var(--u));
-    border: 1px dashed var(--line-strong);
+  .tab .mark {
+    display: inline-flex;
     color: var(--text-3);
-  }
-  .tab.preview::before {
-    content: "";
-    position: absolute;
-    left: calc(-9 * var(--u));
-    top: calc(6 * var(--u));
-    bottom: calc(6 * var(--u));
-    width: 1px;
-    background: var(--line-strong);
-  }
-  .preview-label {
-    font-size: calc(10.5 * var(--u));
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .preview-name {
-    font-style: italic;
   }
 
   .windows {
@@ -802,6 +795,59 @@ import Icon from "./Icon.astro";
   .block .row {
     margin: 0 calc(-8 * var(--u));
     font-size: calc(12.5 * var(--u));
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: calc(5 * var(--u));
+    padding: calc(8 * var(--u));
+    border: 1px solid var(--line);
+    border-radius: calc(7 * var(--u));
+    background: var(--raised);
+    font-size: calc(12 * var(--u));
+  }
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: calc(6 * var(--u));
+    font-weight: 500;
+  }
+  .card-head .name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .card-sub {
+    font-size: calc(11 * var(--u));
+  }
+  .progress {
+    display: block;
+    height: calc(5 * var(--u));
+    border-radius: calc(3 * var(--u));
+    background: linear-gradient(
+      90deg,
+      #81b29a 0 var(--p-done),
+      #719cd6 var(--p-done) calc(var(--p-done) + var(--p-run)),
+      var(--panel) calc(var(--p-done) + var(--p-run))
+    );
+  }
+  .task {
+    display: flex;
+    align-items: center;
+    gap: calc(7 * var(--u));
+    padding-left: calc(10 * var(--u));
+    font-size: calc(12 * var(--u));
+    white-space: nowrap;
+  }
+  .task .glyph :global(svg) {
+    width: calc(12 * var(--u));
+    height: calc(12 * var(--u));
+  }
+  .foot {
+    margin-top: auto;
+    padding-top: calc(10 * var(--u));
+    border-top: 1px solid var(--line);
   }
   .meter {
     display: grid;

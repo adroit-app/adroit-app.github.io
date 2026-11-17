@@ -16,19 +16,20 @@ running when this computer sleeps or closes.
 
 ## Set up a work machine
 
-On the work machine, run the terminal host, the work host and the gateway as
-services of your user:
+On the work machine, register its gateway as a service of your user, which
+starts the terminal host and the work host whenever none runs:
 
 ```sh
 adroit remote enable
 ```
 
-They start with the `PATH` your login shell has, so it has to find the
+It starts with the `PATH` your login shell has, so it has to find the
 agents, git, jj and any program your sessions use. On macOS, run it with the
 `adroit` inside Adroit.app, and allow Adroit to find devices on the local
 network when macOS asks. On Linux, the services run without a login only when
 you have enabled lingering for your user. `adroit remote disable` stops and
-removes them.
+removes it. Settings also turns the gateway on and off; turning it off ends
+none of the work it served.
 
 A machine without a desktop needs only the build without the window; see
 [Install](/docs/install/#a-work-machine-without-a-window).
@@ -46,6 +47,14 @@ adroit remote pair
 From the command line, `adroit connect pair <address>` on this computer does
 the same. `adroit connect` checks the connection without changing anything.
 
+Adding lists the environments that machine already serves: its own, and each
+one made there from any computer, with how many of its sessions run. Join one
+to work in it from this computer too, so work started on one computer goes on
+from another and every window that joined sees and drives the same sessions;
+or make a new one. An idle environment nobody lists can be deleted there,
+after asking, which removes its history, settings and logins from that
+machine.
+
 The environment is named after its work machine unless you name it, and
 every window lists it at once. Its heading's menu renames it, tries it again,
 pairs with it again, or removes it. Removing an environment ends nothing:
@@ -55,8 +64,9 @@ its sessions keep running on its machine, and Settings can restore it.
 
 - Agent profiles, their logins, working directories and console themes
   belong to the environment, on its work machine. Log in to an agent there.
-- Fonts, zoom, the prompt's and the reader's Neovim configuration and other
-  display and input preferences stay on this computer, for every environment.
+- Fonts, zoom, themes, the prompt's and the reader's Neovim configuration,
+  the details panel's arrangement, key bindings and other display and input
+  preferences stay on this computer, for every environment.
 - Paths on a work machine are its own: this computer's file tools cannot
   open them.
 
